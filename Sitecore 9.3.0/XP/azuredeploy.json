@@ -386,7 +386,7 @@
     },
     "applicationInsightsLocation": {
       "type": "string",
-      "defaultValue": "East US"
+      "defaultValue": "australiasoutheast"
     },
     "storeSitecoreCountersInApplicationInsights": {
       "type": "bool",
@@ -403,6 +403,16 @@
       "defaultValue": "[concat(parameters('deploymentId'), '-ai-pp')]"
     },
 
+    "frontendHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-frontend-hp')]"
+    },
+    "backendHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-frontend-hp')]"
+    },
     "siHostingPlanName": {
       "type": "string",
       "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
@@ -833,21 +843,12 @@
           "applicationInsightsPricePlan": {
             "value": "[parameters('applicationInsightsPricePlan')]"
           },
-
-          "siHostingPlanName": {
-            "value": "[parameters('siHostingPlanName')]"
+          
+          "frontendHostingPlanName": {
+            "value": "[parameters('frontendHostingPlanName')]"
           },
-          "cmHostingPlanName": {
-            "value": "[parameters('cmHostingPlanName')]"
-          },
-          "cdHostingPlanName": {
-            "value": "[parameters('cdHostingPlanName')]"
-          },
-          "prcHostingPlanName": {
-            "value": "[parameters('prcHostingPlanName')]"
-          },
-          "repHostingPlanName": {
-            "value": "[parameters('repHostingPlanName')]"
+          "backendHostingPlanName": {
+            "value": "[parameters('backendHostingPlanName')]"
           },
 
           "siWebAppName": {

@@ -787,7 +787,7 @@
     {
       "type": "Microsoft.Web/serverfarms",
       "name": "[variables('frontendHostingPlanNameTidy')]",
-      "apiVersion" "[variables('serverFarmApiVersion')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
       "sku": {
         "name": "[if(not(variables('useAse')), parameters('resourceSizes').frontendHostingPlan.SkuName, parameters('resourceSizes').frontendHostingPlanIsolated.SkuName)]",
         "capacity": "[if(not(variables('useAse')), parameters('resourceSizes').frontendHostingPlan.SkuCapacity, parameters('resourceSizes').frontendHostingPlanIsolated.SkuCapacity)]"
@@ -805,7 +805,7 @@
      {
       "type": "Microsoft.Web/serverfarms",
       "name": "[variables('backendHostingPlanNameTidy')]",
-      "apiVersion" "[variables('serverFarmApiVersion')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
       "sku": {
         "name": "[if(not(variables('useAse')), parameters('resourceSizes').backendHostingPlan.SkuName, parameters('resourceSizes').backendHostingPlanIsolated.SkuName)]",
         "capacity": "[if(not(variables('useAse')), parameters('resourceSizes').backendHostingPlan.SkuCapacity, parameters('resourceSizes').backendHostingPlanIsolated.SkuCapacity)]"

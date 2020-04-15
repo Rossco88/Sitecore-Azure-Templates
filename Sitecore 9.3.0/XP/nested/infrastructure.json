@@ -786,7 +786,7 @@
   "resources": [
     {
       "type": "Microsoft.Web/serverfarms",
-      "name": "[variables('frontendPlanNameTidy')]",
+      "name": "[variables('frontendHostingPlanNameTidy')]",
       "apiVersion" "[variables('serverFarmApiVersion')]",
       "sku": {
         "name": "[if(not(variables('useAse')), parameters('resourceSizes').frontendHostingPlan.SkuName, parameters('resourceSizes').frontendHostingPlanIsolated.SkuName)]",
@@ -804,7 +804,7 @@
     },
      {
       "type": "Microsoft.Web/serverfarms",
-      "name": "[variables('backendPlanNameTidy')]",
+      "name": "[variables('backendHostingPlanNameTidy')]",
       "apiVersion" "[variables('serverFarmApiVersion')]",
       "sku": {
         "name": "[if(not(variables('useAse')), parameters('resourceSizes').backendHostingPlan.SkuName, parameters('resourceSizes').backendHostingPlanIsolated.SkuName)]",
@@ -817,7 +817,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').backend]"
+        "logicalName": "[variables('sitecoreTags').prc]"
       }
     },
     {

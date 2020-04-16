@@ -349,9 +349,6 @@
         }
       },
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('backendHostingPlanNameTidy'))]"
-      ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').xcRefData]"
@@ -403,9 +400,6 @@
         }
       },
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('backendHostingPlanNameTidy'))]"
-      ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').xcCollect]"

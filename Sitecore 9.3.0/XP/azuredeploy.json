@@ -976,6 +976,9 @@
           "xcResourceIntensiveHostingPlanName": {
             "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
           },
+          "backendHostingPlanName": {
+            "value": "[parameters('backendHostingPlanName')]"
+          },
 
           "xcRefDataWebAppName": {
             "value": "[parameters('xcRefDataWebAppName')]"
@@ -1134,6 +1137,9 @@
           "xcResourceIntensiveHostingPlanName": {
             "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
           },
+          "backendHostingPlanName": {
+            "value": "[parameters('backendHostingPlanName')]"
+          },
 
           "cortexProcessingWebAppName": {
             "value": "[parameters('cortexProcessingWebAppName')]"
@@ -1144,7 +1150,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]"
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]",
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure'))]"
       ]
     },
     {

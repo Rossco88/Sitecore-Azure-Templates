@@ -1086,7 +1086,7 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]"
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]",
         "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure'))]"
       ]
     },

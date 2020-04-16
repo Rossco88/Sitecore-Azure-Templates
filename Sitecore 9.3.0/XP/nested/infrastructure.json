@@ -53,7 +53,9 @@
       "pools": "prc-pools",
       "tasks": "prc-tasks",
       "forms": "forms",
-      "exmmaster" : "exmmaster"
+      "exmmaster" : "exmmaster",
+      "frontend" : "frontend",
+      "backend" : "backend"
     },
 
     "useAse": "[not(empty(parameters('aseName')))]",
@@ -264,11 +266,11 @@
       "type": "secureObject",
       "defaultValue": {
         "Extra Small": {
-          "frontendHostingPlan" : {
+          "frontendHostingPlan": {
             "SkuName": "S1",
             "SkuCapacity": 1
           },
-          "backendHostingPlan" : {
+          "backendHostingPlan": {
             "SkuName": "S1",
             "SkuCapacity": 1
           },
@@ -365,11 +367,11 @@
           }
         },
         "Small": {
-          "frontendHostingPlan" : {
+          "frontendHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
           },
-          "backendHostingPlan" : {
+          "backendHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
           },
@@ -466,11 +468,11 @@
           }
         },
         "Medium": {
-          "frontendHostingPlan" : {
+          "frontendHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
           },
-          "backendHostingPlan" : {
+          "backendHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
           },
@@ -567,11 +569,11 @@
           }
         },
         "Large": {
-          "frontendHostingPlan" : {
+          "frontendHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 1
           },
-          "backendHostingPlan" : {
+          "backendHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 1
           },
@@ -668,11 +670,11 @@
           }
         },
         "Extra Large": {
-          "frontendHostingPlan" : {
+          "frontendHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 1
           },
-          "backendHostingPlan" : {
+          "backendHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 1
           },
@@ -799,7 +801,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').cd]"
+        "logicalName": "[variables('sitecoreTags').frontend]"
       }
     },
      {
@@ -817,7 +819,7 @@
       "location": "[parameters('location')]",
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').prc]"
+        "logicalName": "[variables('sitecoreTags').backend]"
       }
     },
     {

@@ -784,14 +784,12 @@
           "sqlServerPassword": {
             "value": "[parameters('sqlServerPassword')]"
           },
-
           "sqlServerVersion": {
             "value": "[parameters('sqlServerVersion')]"
           },
           "sqlDatabaseCollation": {
             "value": "[parameters('sqlDatabaseCollation')]"
           },
-
           "coreSqlDatabaseName": {
             "value": "[parameters('coreSqlDatabaseName')]"
           },
@@ -850,7 +848,6 @@
           "backendHostingPlanName": {
             "value": "[parameters('backendHostingPlanName')]"
           },
-
           "siWebAppName": {
             "value": "[parameters('siWebAppName')]"
           },

@@ -104,7 +104,7 @@
     "backendHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), 'backend-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-backend-hp')]"
     },
 
     "xcRefDataWebAppName": {

@@ -411,7 +411,7 @@
     "backendHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-frontend-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-backend-hp')]"
     },
     "siHostingPlanName": {
       "type": "string",

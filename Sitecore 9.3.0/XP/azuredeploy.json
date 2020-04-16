@@ -1072,6 +1072,10 @@
           "xcBasicHostingPlanName": {
             "value": "[parameters('xcBasicHostingPlanName')]"
           },
+          "backendHostingPlanName": {
+            "value": "[parameters('backendHostingPlanName')]"
+          },
+
 
           "maOpsWebAppName": {
             "value": "[parameters('maOpsWebAppName')]"
@@ -1083,6 +1087,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]"
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure'))]"
       ]
     },
     {

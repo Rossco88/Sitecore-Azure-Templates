@@ -10,6 +10,7 @@
     "maSqlDatabaseNameTidy": "[toLower(trim(parameters('maSqlDatabaseName')))]",
 
     "xcBasicHostingPlanNameTidy": "[toLower(trim(parameters('xcBasicHostingPlanName')))]",
+    "backendHostingPlanNameTidy": "[tolower(trim(parameters('backendHostingPlanName')))]",
 
     "maOpsWebAppNameTidy": "[toLower(trim(parameters('maOpsWebAppName')))]",
     "maRepWebAppNameTidy": "[toLower(trim(parameters('maRepWebAppName')))]",
@@ -62,6 +63,12 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
+    },
+
+    "backendHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), 'backend-hp')]"
     },
 
     "maOpsWebAppName": {
@@ -157,7 +164,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('xcBasicHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('backendHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,

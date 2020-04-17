@@ -995,7 +995,7 @@
         {
           "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "2017-10-01-preview",
-          "name": "[concat(parameters('sqlServerName'), '/', variables('sqlElasticPoolFrontendNameTidy'))]",
+          "name": "[concat(parameters('sqlServerName'), '/frontend-elastic-pool')]",
           "location": "[parameters('location')]",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"

@@ -1013,7 +1013,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlElasticPoolFrontendName'))]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlElasticPoolFrontendName'), variables('sqlElasticPoolFrontendNameTidy'))]",
             "catalogCollation": "[parameters('sqlDatabaseCollation')]",
             "zoneRedundant": false,
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]",

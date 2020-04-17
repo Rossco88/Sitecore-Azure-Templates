@@ -13,6 +13,7 @@
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
     "sqlElasticPoolFrontendNameTidy": "[tolower(trim(parameters('sqlElasticPoolFrontendName')))]",
     "sqlElasticPoolBackendNameTidy": "[tolower(trim(parameters('sqlElasticPoolBackendName')))]",
+    
 
     "coreSqlDatabaseNameTidy": "[toLower(trim(parameters('coreSqlDatabaseName')))]",
     "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
@@ -995,7 +996,7 @@
         {
           "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "2017-10-01-preview",
-          "name": "[concat(parameters('sqlServerName'), '/frontend-elastic-pool')]",
+          "name": "[variables('sqlElasticPoolFrontendNameTidy')]",
           "location": "[parameters('location')]",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
@@ -1024,11 +1025,11 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'))]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "Sku": {
-            "name": "Standard"
+            "name": "ElasticPool"
           }, 
           "resources": [
             {
@@ -1047,7 +1048,7 @@
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",
-            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]" 
+            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'))]"
             ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",

@@ -1020,13 +1020,16 @@
         },
         {
           "type": "databases",
-          "apiVersion": "[variables('dbApiVersion')]",
+          "apiVersion": "2017-10-01-preview",
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
             "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
+          "Sku": {
+            "name": "Standard"
+          }, 
           "resources": [
             {
               "name": "current",

@@ -1047,7 +1047,7 @@
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",
-            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'))]" 
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]" 
             ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",

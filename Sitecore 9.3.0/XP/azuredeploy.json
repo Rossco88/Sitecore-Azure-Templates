@@ -84,6 +84,16 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-sql')]"
     },
+    "sqlElasticPoolFrontendName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-frontend-elastic-pool')]"
+    },
+    "sqlElasticPoolBackendName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-backend-elastic-pool')]"
+    },
     "sqlServerLogin": {
       "type": "string",
       "minLength": 1
@@ -777,6 +787,12 @@
 
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
+          },
+          "sqlElasticPoolFrontendName": {
+            "value": "[parameters('sqlElasticPoolFrontendName')]"
+          },
+          "sqlElasticPoolBackendName": {
+            "value": "[parameters('sqlElasticPoolBackendName')]"
           },
           "sqlServerLogin": {
             "value": "[parameters('sqlServerLogin')]"

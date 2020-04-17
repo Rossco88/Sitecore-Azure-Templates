@@ -1003,7 +1003,7 @@
           "sku": {
             "name": "[parameters('resourceSizes').frontendSqlElasticPool.SkuName]",
             "tier": "[parameters('resourceSizes').frontendSqlElasticPool.SkuTier]",
-            "capacity": "[parameters('resourceSizes').frontendSqlElasticPool.capacity]"
+            "capacity": "[parameters('resourceSizes').frontendSqlElasticPool.SkuCapacity]"
           },
           "kind": "pool",
           "properties": {

@@ -427,6 +427,14 @@
             "SkuName": "I1",
             "SkuCapacity": 1
           },
+          "frontendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 50,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 50
+          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -993,18 +1001,21 @@
             "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
           ],
           "sku": {
-            "name": "StandardPool",
-            "tier": "Standard",
-            "capacity": 50
+            "name": "[parameters('resourceSizes').frontendSqlElasticPool.SkuName]",
+            "tier": "[parameters('resourceSizes').frontendSqlElasticPool.SkuTier]",
+            "capacity": "[parameters('resourceSizes').frontendSqlElasticPool.capacity]"
           },
           "kind": "pool",
           "properties": {
-                "maxSizeBytes": 53687091200,
+                "maxSizeBytes": "[parameters('resourceSizes').frontendSqlElasticPool.MaxSize]",
                 "perDatabaseSettings": {
-                    "minCapacity": 0,
-                    "maxCapacity": 50
+                    "minCapacity": "[parameters('resourceSizes').frontendSqlElasticPool.minCapacity]",
+                    "maxCapacity": "[parameters('resourceSizes').frontendSqlElasticPool.maxCapacity]"
                 },
                 "zoneRedundant": false
+          },
+          "tags": {
+        "provider": "[variables('sitecoreTags').provider]"
           }
         },
         {
@@ -1013,6 +1024,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/server/elasticPools', parameters('sqlServerName'), '/', variables('sqlElasticPoolFrontendNameTidy'))]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]",
             "requestedServiceObjectiveName": "[parameters('resourceSizes').coreSqlDatabase.ServiceObjectiveLevel]"
           },
@@ -1029,10 +1041,11 @@
               }
             }
           ],
-          "name": "[concat(variables('coreSqlDatabaseNameTidy'))]",
+          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), '/', variables('coreSqlDatabaseNameTidy'))]",
           "location": "[parameters('location')]",
           "dependsOn": [ 
-            "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" 
+            "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'))]" 
             ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",

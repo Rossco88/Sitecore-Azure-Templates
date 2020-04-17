@@ -987,7 +987,7 @@
         {
           "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "2017-10-01-preview",
-          "name": "[variables('sqlElasticPoolFrontendNameTidy')]",
+          "name": "[concat(parameters('sqlServerName'), '/', variables('sqlElasticPoolFrontendNameTidy'))]",
           "location": "[parameters('location')]",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
@@ -1038,7 +1038,7 @@
               }
             }
           ],
-          "name": "[variables('coreSqlDatabaseNameTidy')]",
+          "name": "[concat(parameters('sqlElasticPoolFrontendName'), '/', variables('coreSqlDatabaseNameTidy'))]",
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",

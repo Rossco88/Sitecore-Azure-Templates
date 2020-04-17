@@ -996,7 +996,7 @@
         {
           "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "2017-10-01-preview",
-          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), '-pool')]",
+          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), ' /pool')]",
           "location": "[parameters('location')]",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
@@ -1025,7 +1025,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'), '-pool')]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'), ' /pool')]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "Sku": {
@@ -1048,7 +1048,7 @@
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",
-            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'), '-pool')]"
+            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolFrontendNameTidy'), '/pool')]"
             ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",

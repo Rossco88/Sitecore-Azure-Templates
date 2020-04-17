@@ -1024,9 +1024,8 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/server/elasticPools', parameters('sqlServerName'), '/', variables('sqlElasticPoolFrontendNameTidy'))]",
-            "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').coreSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]",
+            "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "resources": [
             {
@@ -1041,7 +1040,7 @@
               }
             }
           ],
-          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), '/', variables('coreSqlDatabaseNameTidy'))]",
+          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), ' / core-db')]",
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",

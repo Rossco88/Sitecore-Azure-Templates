@@ -1044,7 +1044,7 @@
               }
             }
           ],
-          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), '/core-db')]",
+          "name": "[concat(variables('sqlServerNameTidy'), '/core-db')]",
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]"

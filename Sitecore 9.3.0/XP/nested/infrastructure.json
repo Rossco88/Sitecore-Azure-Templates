@@ -996,7 +996,7 @@
         {
           "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "2017-10-01-preview",
-          "name": "[concat(parameters('sqlServerName'), ' /frontend-elastic-pool')]",
+          "name": "[concat(parameters('sqlServerName'), '/frontend-elastic-pool')]",
           "location": "[parameters('location')]",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
@@ -1025,7 +1025,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), ' /frontend-elastic-pool')]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "Sku": {
@@ -1044,7 +1044,7 @@
               }
             }
           ],
-          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), ' / core-db')]",
+          "name": "[concat(variables('sqlElasticPoolFrontendNameTidy'), '/core-db')]",
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]"

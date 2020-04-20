@@ -1025,7 +1025,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'frontend-elastic-pool')]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "Sku": {
@@ -1047,7 +1047,8 @@
           "name": "[variables('coreSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
           "dependsOn": [ 
-            "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]"
+            "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]"
             ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",

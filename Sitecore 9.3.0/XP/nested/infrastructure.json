@@ -1205,7 +1205,10 @@
             "edition": "[parameters('resourceSizes').tasksSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').tasksSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').tasksSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1222,7 +1225,10 @@
           ],
           "name": "[variables('tasksSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]" 
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').tasks]"
@@ -1235,7 +1241,10 @@
             "edition": "[parameters('resourceSizes').formsSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').formsSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').formsSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1252,7 +1261,10 @@
           ],
           "name": "[variables('formsSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]" 
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').forms]"
@@ -1265,7 +1277,10 @@
             "edition": "[parameters('resourceSizes').exmMasterSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').exmMasterSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').exmMasterSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1282,7 +1297,10 @@
           ],
           "name": "[variables('exmMasterSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]" 
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').exmmaster]"

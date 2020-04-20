@@ -5,6 +5,7 @@
     "webApiVersion": "2018-02-01",
     "serverFarmApiVersion": "2018-02-01",
     "dbApiVersion": "2014-04-01-preview",
+    "sqlApiVersion": "2014-04-01-preview",
     "searchApiVersion": "2015-08-19",
     "redisApiVersion": "2016-04-01",
     "appInsightsApiVersion": "2015-05-01",
@@ -435,6 +436,14 @@
             "MaxSize": 53687091200,
             "minCapacity": 0,
             "maxCapacity": 50
+          },
+          "backendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 100,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 100
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -971,7 +980,7 @@
     },
     {
       "type": "Microsoft.Sql/servers",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "ApiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "administratorLogin": "[parameters('sqlServerLogin')]",
         "administratorLoginPassword": "[parameters('sqlServerPassword')]",
@@ -995,7 +1004,7 @@
         },
         {
           "type": "Microsoft.Sql/servers/elasticPools",
-          "apiVersion": "2017-10-01-preview",
+          "apiVersion": "[variables('dbApiVersion')]",
           "name": "[concat(parameters('sqlServerName'), '/frontend-elastic-pool')]",
           "location": "[parameters('location')]",
           "dependsOn": [
@@ -1020,8 +1029,34 @@
           }
         },
         {
+          "type": "Microsoft.Sql/servers/elasticPools",
+          "apiVersion": "[variables('dbApiVersion')]",
+          "name": "[concat(parameters('sqlServerName'), '/backend-elastic-pool')]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
+          ],
+          "sku": {
+            "name": "[parameters('resourceSizes').backendSqlElasticPool.SkuName]",
+            "tier": "[parameters('resourceSizes').backendSqlElasticPool.SkuTier]",
+            "capacity": "[parameters('resourceSizes').backendSqlElasticPool.SkuCapacity]"
+          },
+          "kind": "pool",
+          "properties": {
+                "maxSizeBytes": "[parameters('resourceSizes').fbackendSqlElasticPool.MaxSize]",
+                "perDatabaseSettings": {
+                    "minCapacity": "[parameters('resourceSizes').backendSqlElasticPool.minCapacity]",
+                    "maxCapacity": "[parameters('resourceSizes').backendSqlElasticPool.maxCapacity]"
+                },
+                "zoneRedundant": false
+          },
+          "tags": {
+        "provider": "[variables('sitecoreTags').provider]"
+          }
+        },
+        {
           "type": "databases",
-          "apiVersion": "2017-10-01-preview",
+          "apiVersion": "[variables('dbApiVersion')]",
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
@@ -1057,7 +1092,7 @@
         },
         {
           "type": "databases",
-          "apiVersion": "2017-10-01-preview",
+          "apiVersion": "[variables('dbApiVersion')]",
           "properties": {
             "edition": "[parameters('resourceSizes').masterSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
@@ -1098,7 +1133,10 @@
             "edition": "[parameters('resourceSizes').webSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').webSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').webSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'frontend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1115,7 +1153,10 @@
           ],
           "name": "[variables('webSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'frontend-elastic-pool')]" 
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').web]"
@@ -1128,7 +1169,10 @@
             "edition": "[parameters('resourceSizes').poolsSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').poolsSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').poolsSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1145,7 +1189,10 @@
           ],
           "name": "[variables('poolsSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]" 
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').pools]"

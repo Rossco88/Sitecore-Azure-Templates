@@ -1025,7 +1025,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'frontend-elastic-pool')]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), '/frontend-elastic-pool')]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "Sku": {

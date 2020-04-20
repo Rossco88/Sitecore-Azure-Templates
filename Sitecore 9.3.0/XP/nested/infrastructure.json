@@ -996,10 +996,10 @@
         {
           "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "2017-10-01-preview",
-          "name": "[concat(variables('sqlServerNameTidy'), '/frontend-elastic-pool')]",
+          "name": "[concat(parameters('sqlServerName'), '/frontend-elastic-pool')]",
           "location": "[parameters('location')]",
           "dependsOn": [
-            "[resourceId('Microsoft.Sql/Servers', variables('sqlServerNameTidy'))]"
+            "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
           ],
           "sku": {
             "name": "[parameters('resourceSizes').frontendSqlElasticPool.SkuName]",
@@ -1025,7 +1025,7 @@
           "properties": {
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').coreSqlDatabase.MaxSize]",
-            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlServerNameTidy'), 'frontend-elastic-pool')]",
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'frontend-elastic-pool')]",
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]"
           },
           "Sku": {
@@ -1036,7 +1036,7 @@
               "name": "current",
               "type": "transparentDataEncryption",
               "dependsOn": [
-                "[concat(variables('sqlServerNameTidy'), '/frontend-elastic-pool')]"
+                "[variables('coreSqlDatabaseNameTidy')]"
               ],
               "apiVersion": "2014-04-01",
               "properties": {
@@ -1048,7 +1048,7 @@
           "location": "[parameters('location')]",
           "dependsOn": [ 
             "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]",
-            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlServerNameTidy'), 'frontend-elastic-pool')]"
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'frontend-elastic-pool')]"
             ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",

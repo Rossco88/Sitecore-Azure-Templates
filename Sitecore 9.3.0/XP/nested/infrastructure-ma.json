@@ -3,9 +3,11 @@
   "contentVersion": "1.0.0.0",
   "variables": {
     "webApiVersion": "2018-02-01",
-    "dbApiVersion": "2014-04-01-preview",
+    "dbApiVersion": "2017-10-01-preview",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
+    "sqlElasticPoolFrontendNameTidy": "[tolower(trim(parameters('sqlElasticPoolFrontendName')))]",
+    "sqlElasticPoolBackendNameTidy": "[tolower(trim(parameters('sqlElasticPoolBackendName')))]",
 
     "maSqlDatabaseNameTidy": "[toLower(trim(parameters('maSqlDatabaseName')))]",
 
@@ -45,6 +47,16 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-sql')]"
+    },
+     "sqlElasticPoolFrontendName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-frontend-elastic-pool')]"
+    },
+    "sqlElasticPoolBackendName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-backend-elastic-pool')]"
     },
 
     "sqlDatabaseCollation": {
@@ -129,7 +141,7 @@
   },
   "resources": [
     {
-      "name": "[concat(variables('sqlServerNameTidy'), '/', variables('maSqlDatabaseNameTidy'))]",
+      "name": "[variables('maSqlDatabaseNameTidy')]",
       "type": "Microsoft.Sql/servers/databases",
       "location": "[parameters('location')]",
       "apiVersion": "[variables('dbApiVersion')]",
@@ -137,8 +149,11 @@
         "edition": "[parameters('resourceSizes').maSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').maSqlDatabase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').maSqlDatabase.ServiceObjectiveLevel]"
-      },
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",
@@ -152,6 +167,10 @@
           }
         }
       ],
+      "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]" 
+            ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').ma]"

@@ -51,12 +51,12 @@
      "sqlElasticPoolFrontendName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-frontend-elastic-pool')]"
+      "defaultValue": "[concat(parameters('sqlServerName'), '/frontend-elastic-pool')]"
     },
     "sqlElasticPoolBackendName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-backend-elastic-pool')]"
+      "defaultValue": "[concat(parameters('sqlServerName'), '/backend-elastic-pool')]"
     },
 
     "sqlDatabaseCollation": {
@@ -149,7 +149,7 @@
         "edition": "[parameters('resourceSizes').maSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').maSqlDatabase.MaxSize]",
-        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolBackendNameTidy'))]"
           },
            "Sku": {
             "name": "ElasticPool"
@@ -167,6 +167,9 @@
           }
         }
       ],
+      "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolBackendNameTidy'))]" 
+            ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').ma]"

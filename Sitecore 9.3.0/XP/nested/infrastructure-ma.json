@@ -167,6 +167,10 @@
           }
         }
       ],
+      "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]" 
+            ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').ma]"

@@ -141,7 +141,7 @@
   },
   "resources": [
     {
-      "name": "[variables('maSqlDatabaseNameTidy')]",
+      "name": "[concat(variables('sqlServerNameTidy'), '/', variables('maSqlDatabaseNameTidy'))]",
       "type": "Microsoft.Sql/servers/databases",
       "location": "[parameters('location')]",
       "apiVersion": "[variables('dbApiVersion')]",
@@ -149,7 +149,7 @@
         "edition": "[parameters('resourceSizes').maSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').maSqlDatabase.MaxSize]",
-        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlServerNameTidy'), 'backend-elastic-pool')]"
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
           },
            "Sku": {
             "name": "ElasticPool"

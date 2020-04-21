@@ -1079,6 +1079,12 @@
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
           },
+          "sqlElasticPoolFrontendName": {
+            "value": "[parameters('sqlElasticPoolFrontendName')]"
+          },
+          "sqlElasticPoolBackendName": {
+            "value": "[parameters('sqlElasticPoolBackendName')]"
+          },
 
           "sqlDatabaseCollation": {
             "value": "[parameters('sqlDatabaseCollation')]"

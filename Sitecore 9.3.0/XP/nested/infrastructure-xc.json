@@ -4,7 +4,7 @@
   "variables": {
     "webApiVersion": "2018-02-01",
     "serverFarmApiVersion": "2018-02-01",
-    "dbApiVersion": "2014-04-01-preview",
+    "dbApiVersion": "2017-10-01-preview",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
 
@@ -363,8 +363,11 @@
         "edition": "[parameters('resourceSizes').refDataSqlDataBase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').refDataSqlDataBase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').refDataSqlDataBase.ServiceObjectiveLevel]"
-      },
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",
@@ -414,8 +417,11 @@
         "edition": "[parameters('resourceSizes').shardMapManagerSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').shardMapManagerSqlDatabase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').shardMapManagerSqlDatabase.ServiceObjectiveLevel]"
-      },
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",
@@ -443,8 +449,11 @@
         "edition": "[parameters('resourceSizes').xcShard0SqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').xcShard0SqlDatabase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').xcShard0SqlDatabase.ServiceObjectiveLevel]"
-      },
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",
@@ -472,8 +481,11 @@
         "edition": "[parameters('resourceSizes').xcShard1SqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').xcShard1SqlDatabase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').xcShard1SqlDatabase.ServiceObjectiveLevel]"
-      },
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'backend-elastic-pool')]"
+          },
+           "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",

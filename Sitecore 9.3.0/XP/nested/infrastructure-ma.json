@@ -149,7 +149,7 @@
         "edition": "[parameters('resourceSizes').maSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').maSqlDatabase.MaxSize]",
-        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolBackendNameTidy'))]"
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlServerNameTidy'), 'backend-elastic-pool')]"
           },
            "Sku": {
             "name": "ElasticPool"
@@ -167,9 +167,6 @@
           }
         }
       ],
-      "dependsOn": [ 
-            "[resourceId('Microsoft.Sql/servers/elasticPools', variables('sqlElasticPoolBackendNameTidy'))]" 
-            ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').ma]"

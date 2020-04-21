@@ -328,6 +328,22 @@
             "SkuName": "I1",
             "SkuCapacity": 1
           },
+          "frontendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 50,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 50
+          },
+          "backendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 50,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 50
+          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -546,6 +562,22 @@
             "SkuName": "I1",
             "SkuCapacity": 1
           },
+          "frontendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 100,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 100
+          },
+          "backendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 100,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 100
+          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -647,6 +679,22 @@
             "SkuName": "I2",
             "SkuCapacity": 1
           },
+          "frontendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 100,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 100
+          },
+          "backendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 200,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 200
+          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -747,6 +795,22 @@
           "repHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 1
+          },
+          "frontendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 200,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 200
+          },
+          "backendSqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 300,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 300
           },
           "coreSqlDatabase": {
             "Edition": "Standard",

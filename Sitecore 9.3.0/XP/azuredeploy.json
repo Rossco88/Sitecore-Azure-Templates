@@ -84,6 +84,11 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-sql')]"
     },
+    "sqlElasticPoolName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-elastic-pool')]"
+    },
     "sqlServerLogin": {
       "type": "string",
       "minLength": 1
@@ -386,7 +391,7 @@
     },
     "applicationInsightsLocation": {
       "type": "string",
-      "defaultValue": "East US"
+      "defaultValue": "australiasoutheast"
     },
     "storeSitecoreCountersInApplicationInsights": {
       "type": "bool",
@@ -416,6 +421,11 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
+    },
+    "cdFailoverHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover-hp')]"
     },
     "prcHostingPlanName": {
       "type": "string",
@@ -456,6 +466,11 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
+    },
+    "cdFailoverWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
     },
     "prcWebAppName": {
       "type": "string",
@@ -768,6 +783,9 @@
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
           },
+          "sqlElasticPoolName": {
+            "value": "[parameters('sqlElasticPoolName')]"
+          },
           "sqlServerLogin": {
             "value": "[parameters('sqlServerLogin')]"
           },
@@ -843,6 +861,9 @@
           "cdHostingPlanName": {
             "value": "[parameters('cdHostingPlanName')]"
           },
+          "cdFailoverHostingPlanName": {
+            "value": "[parameters('cdFailoverHostingPlanName')]"
+          },
           "prcHostingPlanName": {
             "value": "[parameters('prcHostingPlanName')]"
           },
@@ -858,6 +879,9 @@
           },
           "cdWebAppName": {
             "value": "[parameters('cdWebAppName')]"
+          },
+          "cdFailoverWebAppName": {
+            "value": "[parameters('cdFailoverWebAppName')]"
           },
           "prcWebAppName": {
             "value": "[parameters('prcWebAppName')]"
@@ -954,6 +978,9 @@
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
           },
+          "sqlElasticPoolName": {
+            "value": "[parameters('sqlElasticPoolName')]"
+          },
 
           "sqlDatabaseCollation": {
             "value": "[parameters('sqlDatabaseCollation')]"
@@ -1021,6 +1048,9 @@
           "sitecoreSKU": {
             "value": "[parameters('sitecoreSKU')]"
           },
+          "sqlElasticPoolName": {
+            "value": "[parameters('sqlElasticPoolName')]"
+          },
 
           "exmDdsHostingPlanName": {
             "value": "[parameters('exmDdsHostingPlanName')]"
@@ -1062,6 +1092,9 @@
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
           },
+          "sqlElasticPoolName": {
+            "value": "[parameters('sqlElasticPoolName')]"
+          },
 
           "sqlDatabaseCollation": {
             "value": "[parameters('sqlDatabaseCollation')]"
@@ -1084,7 +1117,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]"
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]",
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure'))]"
       ]
     },
     {
@@ -1109,6 +1143,9 @@
 
           "sqlServerName": {
             "value": "[parameters('sqlServerName')]"
+          },
+          "sqlElasticPoolName": {
+            "value": "[parameters('sqlElasticPoolName')]"
           },
 
           "sqlDatabaseCollation": {
@@ -1141,7 +1178,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]"
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure-xc'))]",
+        "[resourceId('Microsoft.Resources/deployments',concat(parameters('deploymentId'), '-infrastructure'))]"
       ]
     },
     {
@@ -1307,6 +1345,9 @@
           },
           "cdWebAppName": {
             "value": "[parameters('cdWebAppName')]"
+          },
+          "cdFailoverWebAppName": {
+            "value": "[parameters('cdFailoverWebAppName')]"
           },
           "prcWebAppName": {
             "value": "[parameters('prcWebAppName')]"

@@ -3,7 +3,8 @@
   "contentVersion": "1.0.0.0",
   "variables": {
     "webApiVersion": "2018-02-01",
-    "dbApiVersion": "2014-04-01-preview",
+    "dbApiVersion": "2017-10-01-preview",
+    "sqlApiVersion": "2014-04-01-preview",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
 
@@ -200,8 +201,11 @@
         "edition": "[parameters('resourceSizes').processingEngineTasksSqlDataBase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').processingEngineTasksSqlDataBase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').processingEngineTasksSqlDataBase.ServiceObjectiveLevel]"
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
       },
+      "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",
@@ -229,8 +233,11 @@
         "edition": "[parameters('resourceSizes').processingEngineStorageSqlDataBase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').processingEngineStorageSqlDataBase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').processingEngineStorageSqlDataBase.ServiceObjectiveLevel]"
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
       },
+      "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",
@@ -258,8 +265,11 @@
         "edition": "[parameters('resourceSizes').reportingSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
         "maxSizeBytes": "[parameters('resourceSizes').reportingSqlDatabase.MaxSize]",
-        "requestedServiceObjectiveName": "[parameters('resourceSizes').reportingSqlDatabase.ServiceObjectiveLevel]"
+        "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
       },
+      "Sku": {
+            "name": "ElasticPool"
+          },
       "resources": [
         {
           "name": "current",

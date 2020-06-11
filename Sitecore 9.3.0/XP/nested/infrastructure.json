@@ -210,7 +210,7 @@
     "cdFailoverHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover-hp')]"
     },
     "prcHostingPlanName": {
       "type": "string",

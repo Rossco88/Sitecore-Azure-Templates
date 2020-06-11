@@ -3,7 +3,8 @@
   "contentVersion": "1.0.0.0",
   "variables": {
     "webApiVersion": "2018-02-01",
-    "dbApiVersion": "2014-04-01-preview",
+    "dbApiVersion": "2017-10-01-preview",
+    "sqlApiVersion": "2014-04-01-preview",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
 
@@ -125,7 +126,7 @@
       "name": "[concat(variables('sqlServerNameTidy'), '/', variables('maSqlDatabaseNameTidy'))]",
       "type": "Microsoft.Sql/servers/databases",
       "location": "[parameters('location')]",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "apiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "edition": "[parameters('resourceSizes').maSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",

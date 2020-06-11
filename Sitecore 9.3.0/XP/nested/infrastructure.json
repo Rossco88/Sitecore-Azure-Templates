@@ -4,13 +4,15 @@
   "variables": {
     "webApiVersion": "2018-02-01",
     "serverFarmApiVersion": "2018-02-01",
-    "dbApiVersion": "2014-04-01-preview",
+    "dbApiVersion": "2017-10-01-preview",
+    "sqlApiVersion": "2014-04-01-preview",
     "searchApiVersion": "2015-08-19",
     "redisApiVersion": "2016-04-01",
     "appInsightsApiVersion": "2015-05-01",
     "certificateApiVersion": "2014-11-01",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
+    "sqlEasticPoolNameTidy": "[tolower(trim(parameters('sqlElasticPoolName')))]",
 
     "coreSqlDatabaseNameTidy": "[toLower(trim(parameters('coreSqlDatabaseName')))]",
     "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
@@ -23,12 +25,14 @@
     "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
     "cmHostingPlanNameTidy": "[toLower(trim(parameters('cmHostingPlanName')))]",
     "cdHostingPlanNameTidy": "[toLower(trim(parameters('cdHostingPlanName')))]",
+    "cdFailoverHostingPlanNameTidy": "[tolower(trim(parameters('cdFailoverHostingPlanName')))]",
     "prcHostingPlanNameTidy": "[toLower(trim(parameters('prcHostingPlanName')))]",
     "repHostingPlanNameTidy": "[toLower(trim(parameters('repHostingPlanName')))]",
 
     "siWebAppNameTidy": "[toLower(trim(parameters('siWebAppName')))]",
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[toLower(trim(parameters('cdWebAppName')))]",
+    "cdFailoverWebAppNameTidy": "[tolower(trim(parameters('cdFailoverWebAppName')))]",
     "prcWebAppNameTidy": "[toLower(trim(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]",
 
@@ -83,6 +87,11 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-sql')]"
+    },
+    "sqlElasticPoolName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentid'), '-elastic-pool')]"
     },
     "sqlServerLogin": {
       "type": "string",
@@ -198,6 +207,11 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
     },
+    "cdFailoverHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
+    },
     "prcHostingPlanName": {
       "type": "string",
       "minLength": 1,
@@ -223,6 +237,11 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
+    },
+    "cdFailoverwebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
     },
     "prcWebAppName": {
       "type": "string",
@@ -272,6 +291,10 @@
             "SkuName": "S2",
             "SkuCapacity": 1
           },
+          "cdFailoverHostingPlan": {
+            "SkuName": "S2",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I1",
             "SkuCapacity": 1
@@ -291,6 +314,14 @@
           "repHostingPlanIsolated": {
             "SkuName": "I1",
             "SkuCapacity": 1
+          },
+          "SqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 50,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 50
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -365,6 +396,10 @@
             "SkuName": "S2",
             "SkuCapacity": 2
           },
+          "cdFailoverHostingPlan": {
+            "SkuName": "S2",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 1
@@ -384,6 +419,14 @@
           "repHostingPlanIsolated": {
             "SkuName": "I1",
             "SkuCapacity": 1
+          },
+          "SqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 50,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 50
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -458,6 +501,10 @@
             "SkuName": "S2",
             "SkuCapacity": 3
           },
+          "cdFailoverHostingPlan": {
+            "SkuName": "S2",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 2
@@ -477,6 +524,14 @@
           "repHostingPlanIsolated": {
             "SkuName": "I1",
             "SkuCapacity": 1
+          },
+          "SqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 100,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 100
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -551,6 +606,10 @@
             "SkuName": "S3",
             "SkuCapacity": 4
           },
+          "cdFailoverHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I3",
             "SkuCapacity": 2
@@ -570,6 +629,14 @@
           "repHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 1
+          },
+          "SqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 200,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 200
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -644,6 +711,10 @@
             "SkuName": "S3",
             "SkuCapacity": 8
           },
+          "cdFailoverHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I3",
             "SkuCapacity": 4
@@ -663,6 +734,14 @@
           "repHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 1
+          },
+          "SqlElasticPool": {
+            "SkuName": "StandardPool",
+            "SkuTier": "Standard",
+            "SkuCapacity": 300,
+            "MaxSize": 53687091200,
+            "minCapacity": 0,
+            "maxCapacity": 300
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -781,6 +860,27 @@
       },
       "properties": {
         "name": "[variables('cdHostingPlanNameTidy')]",
+        "hostingEnvironmentProfile": "[if(variables('useAse'), variables('aseHostingEnvironmentProfile'), '')]"
+      },
+      "location": "[parameters('location')]",
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').cd]"
+      },
+      "dependsOn": [ 
+        "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]" 
+      ]
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('cdFailoverHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "sku": {
+        "name": "[if(not(variables('useAse')), parameters('resourceSizes').cdFailoverHostingPlan.SkuName, parameters('resourceSizes').cdHostingPlanIsolated.SkuName)]",
+        "capacity": "[if(not(variables('useAse')), parameters('resourceSizes').cdFailoverHostingPlan.SkuCapacity, parameters('resourceSizes').cdHostingPlanIsolated.SkuCapacity)]"
+      },
+      "properties": {
+        "name": "[variables('cdFailoverHostingPlanNameTidy')]",
         "hostingEnvironmentProfile": "[if(variables('useAse'), variables('aseHostingEnvironmentProfile'), '')]"
       },
       "location": "[parameters('location')]",
@@ -914,6 +1014,30 @@
     },
     {
       "type": "Microsoft.Web/sites",
+      "name": "[variables('cdFailoverWebAppNameTidy')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]",
+        "siteConfig": {
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "phpVersion": "",
+          "defaultDocuments": [
+            "index.html"
+          ]
+        }
+      },
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').cd]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
       "name": "[variables('prcWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
@@ -962,7 +1086,7 @@
     },
     {
       "type": "Microsoft.Sql/servers",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "apiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "administratorLogin": "[parameters('sqlServerLogin')]",
         "administratorLoginPassword": "[parameters('sqlServerPassword')]",
@@ -985,8 +1109,34 @@
           "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ]
         },
         {
-          "type": "databases",
+          "type": "Microsoft.Sql/servers/elasticPools",
           "apiVersion": "[variables('dbApiVersion')]",
+          "name": "[concat(parameters('sqlServerName'), '/elastic-pool')]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/Servers', parameters('sqlServerName'))]"
+          ],
+          "sku": {
+            "name": "[parameters('resourceSizes').sqlElasticPool.SkuName]",
+            "tier": "[parameters('resourceSizes').sqlElasticPool.SkuTier]",
+            "capacity": "[parameters('resourceSizes').sqlElasticPool.SkuCapacity]"
+          },
+          "kind": "pool",
+          "properties": {
+                "maxSizeBytes": "[parameters('resourceSizes').sqlElasticPool.MaxSize]",
+                "perDatabaseSettings": {
+                    "minCapacity": "[parameters('resourceSizes').sqlElasticPool.minCapacity]",
+                    "maxCapacity": "[parameters('resourceSizes').sqlElasticPool.maxCapacity]"
+                },
+                "zoneRedundant": false
+          },
+          "tags": {
+        "provider": "[variables('sitecoreTags').provider]"
+          }
+        },
+        {
+          "type": "databases",
+          "apiVersion": "[variables('sqlApiVersion')]",
           "properties": {
             "edition": "[parameters('resourceSizes').coreSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
@@ -1016,7 +1166,7 @@
         },
         {
           "type": "databases",
-          "apiVersion": "[variables('dbApiVersion')]",
+          "apiVersion": "[variables('sqlApiVersion')]",
           "properties": {
             "edition": "[parameters('resourceSizes').masterSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
@@ -1046,7 +1196,7 @@
         },
 		    {
           "type": "databases",
-          "apiVersion": "[variables('dbApiVersion')]",
+          "apiVersion": "[variables('sqlApiVersion')]",
           "properties": {
             "edition": "[parameters('resourceSizes').webSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
@@ -1081,7 +1231,10 @@
             "edition": "[parameters('resourceSizes').poolsSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').poolsSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').poolsSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+          },
+          "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1098,7 +1251,10 @@
           ],
           "name": "[variables('poolsSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').pools]"
@@ -1111,7 +1267,10 @@
             "edition": "[parameters('resourceSizes').tasksSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').tasksSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').tasksSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+          },
+          "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1128,7 +1287,10 @@
           ],
           "name": "[variables('tasksSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').tasks]"
@@ -1141,7 +1303,10 @@
             "edition": "[parameters('resourceSizes').formsSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').formsSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').formsSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+          },
+          "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1158,7 +1323,10 @@
           ],
           "name": "[variables('formsSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').forms]"
@@ -1171,7 +1339,10 @@
             "edition": "[parameters('resourceSizes').exmMasterSqlDatabase.Edition]",
             "collation": "[parameters('sqlDatabaseCollation')]",
             "maxSizeBytes": "[parameters('resourceSizes').exmMasterSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').exmMasterSqlDatabase.ServiceObjectiveLevel]"
+            "elasticPoolId": "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+          },
+          "Sku": {
+            "name": "ElasticPool"
           },
           "resources": [
             {
@@ -1188,7 +1359,10 @@
           ],
           "name": "[variables('exmMasterSqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
+          "dependsOn": [ 
+            "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
+            "[resourceId('Microsoft.Sql/servers/elasticPools', parameters('sqlServerName'), 'elastic-pool')]"
+            ],
           "tags": {
             "provider": "[variables('sitecoreTags').provider]",
             "logicalName": "[variables('sitecoreTags').exmmaster]"
@@ -1272,6 +1446,7 @@
         "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('prcHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('repHostingPlanNameTidy'))]"
       ],

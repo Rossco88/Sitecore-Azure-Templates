@@ -4,7 +4,8 @@
   "variables": {
     "webApiVersion": "2018-02-01",
     "serverFarmApiVersion": "2018-02-01",
-    "dbApiVersion": "2014-04-01-preview",
+    "dbApiVersion": "2017-10-01-preview",
+    "sqlApiVersion": "2014-04-01-preview",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
 
@@ -394,7 +395,7 @@
       "type": "Microsoft.Sql/servers/databases",
       "name": "[concat(variables('sqlServerNameTidy'), '/', variables('refDataSqlDatabaseNameTidy'))]",
       "location": "[parameters('location')]",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "apiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "edition": "[parameters('resourceSizes').refDataSqlDataBase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
@@ -448,7 +449,7 @@
       "type": "Microsoft.Sql/servers/databases",
       "name": "[concat(variables('sqlServerNameTidy'),'/',variables('shardMapManagerSqlDatabaseNameTidy'))]",
       "location": "[parameters('location')]",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "apiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "edition": "[parameters('resourceSizes').shardMapManagerSqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
@@ -477,7 +478,7 @@
       "type": "Microsoft.Sql/servers/databases",
       "name": "[concat(variables('sqlServerNameTidy'),'/',variables('shard0SqlDatabaseNameTidy'))]",
       "location": "[parameters('location')]",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "apiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "edition": "[parameters('resourceSizes').xcShard0SqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",
@@ -506,7 +507,7 @@
       "type": "Microsoft.Sql/servers/databases",
       "name": "[concat(variables('sqlServerNameTidy'),'/',variables('shard1SqlDatabaseNameTidy'))]",
       "location": "[parameters('location')]",
-      "apiVersion": "[variables('dbApiVersion')]",
+      "apiVersion": "[variables('sqlApiVersion')]",
       "properties": {
         "edition": "[parameters('resourceSizes').xcShard1SqlDatabase.Edition]",
         "collation": "[parameters('sqlDatabaseCollation')]",

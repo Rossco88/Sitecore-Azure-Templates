@@ -12,7 +12,7 @@
     "certificateApiVersion": "2014-11-01",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
-    "sqlEasticPoolNameTidy": "[tolower(trim(parameters('sqlElasticPoolName')))]",
+    "sqlElasticPoolNameTidy": "[tolower(trim(parameters('sqlElasticPoolName')))]",
 
     "coreSqlDatabaseNameTidy": "[toLower(trim(parameters('coreSqlDatabaseName')))]",
     "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
@@ -184,7 +184,7 @@
     },
     "applicationInsightsLocation": {
       "type": "string",
-      "defaultValue": "East US"
+      "defaultValue": "australiasoutheast"
     },
     "applicationInsightsPricePlan": {
       "type": "string",

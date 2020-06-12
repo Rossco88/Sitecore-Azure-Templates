@@ -393,7 +393,11 @@
     "powerShellExtensionsMsDeployPackageUrl": {
       "type": "securestring",
       "minLength": 1
-    },    
+    },
+    "SitecoreJSSMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },      
 
     "securityClientIp": {
       "type": "string",
@@ -590,6 +594,15 @@
           },
           {
 	          "packageUri": "[parameters('powerShellExtensionsMsDeployPackageUrl')]",
+	          "AppOffline": true,
+	          "setParameters": {
+	            "Application Path": "[variables('cmWebAppNameTidy')]",
+	            "Core Admin Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('coreSqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",          
+	            "Master Admin Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('masterSqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]"
+	          }
+          },
+          {
+	          "packageUri": "[parameters('SitecoreJSSMsDeployPackageUrl')]",
 	          "AppOffline": true,
 	          "setParameters": {
 	            "Application Path": "[variables('cmWebAppNameTidy')]",

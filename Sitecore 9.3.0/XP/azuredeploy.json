@@ -575,6 +575,10 @@
       "type": "securestring",
       "minLength": 1
     },
+    "SitecoreJSSMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },    
     "setCompatibilityLevelMsDeployPackageUrl":{
       "type": "securestring",
       "minLength": 1,
@@ -1395,6 +1399,9 @@
           },
           "powerShellExtensionsMsDeployPackageUrl": {
             "value": "[parameters('powerShellExtensionsMsDeployPackageUrl')]"
+          },
+          "SitecoreJSSMsDeployPackageUrl": {
+            "value": "[parameters('SitecoreJSSMsDeployPackageUrl')]"
           },
           "setCompatibilityLevelMsDeployPackageUrl": {
             "value": "[parameters('setCompatibilityLevelMsDeployPackageUrl')]"

@@ -578,7 +578,11 @@
     "SitecoreJSSMsDeployPackageUrl": {
       "type": "securestring",
       "minLength": 1
-    },    
+    },
+    "SXAMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },     
     "setCompatibilityLevelMsDeployPackageUrl":{
       "type": "securestring",
       "minLength": 1,
@@ -1401,6 +1405,9 @@
             "value": "[parameters('powerShellExtensionsMsDeployPackageUrl')]"
           },
           "SitecoreJSSMsDeployPackageUrl": {
+            "value": "[parameters('SitecoreJSSMsDeployPackageUrl')]"
+          },
+          "SXAMsDeployPackageUrl": {
             "value": "[parameters('SitecoreJSSMsDeployPackageUrl')]"
           },
           "setCompatibilityLevelMsDeployPackageUrl": {

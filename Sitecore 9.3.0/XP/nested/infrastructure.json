@@ -184,7 +184,7 @@
     },
     "applicationInsightsLocation": {
       "type": "string",
-      "defaultValue": "australiasoutheast"
+      "defaultValue": "australiaeast"
     },
     "applicationInsightsPricePlan": {
       "type": "string",
@@ -883,7 +883,7 @@
         "name": "[variables('cdFailoverHostingPlanNameTidy')]",
         "hostingEnvironmentProfile": "[if(variables('useAse'), variables('aseHostingEnvironmentProfile'), '')]"
       },
-      "location": "australiaeast",
+      "location": "australiasoutheast",
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').cd]"
@@ -1027,7 +1027,7 @@
           ]
         }
       },
-      "location": "australiaeast",
+      "location": "australiasoutheast",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]"
       ],

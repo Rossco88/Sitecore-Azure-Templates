@@ -571,6 +571,10 @@
       "type": "securestring",
       "defaultValue": ""
     },
+    "powerShellExtensionsMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },
     "setCompatibilityLevelMsDeployPackageUrl":{
       "type": "securestring",
       "minLength": 1,
@@ -1388,6 +1392,9 @@
           },
           "repMsDeployPackageUrl": {
             "value": "[parameters('repMsDeployPackageUrl')]"
+          },
+          "powerShellExtensionsMsDeployPackageUrl": {
+            "value": "[parameters('powerShellExtensionsMsDeployPackageUrl')]"
           },
           "setCompatibilityLevelMsDeployPackageUrl": {
             "value": "[parameters('setCompatibilityLevelMsDeployPackageUrl')]"

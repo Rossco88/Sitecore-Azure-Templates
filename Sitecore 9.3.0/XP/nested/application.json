@@ -389,6 +389,10 @@
     "setCompatibilityLevelMsDeployPackageUrl":{
       "type": "securestring",
       "minLength": 1
+    },
+    "powerShellExtensionsMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
     },    
 
     "securityClientIp": {
@@ -583,6 +587,15 @@
               "Allow Invalid Client Certificates": "[parameters('allowInvalidClientCertificates')]",
               "License Xml": "[parameters('licenseXml')]"
             }
+          },
+          {
+	          "packageUri": "[parameters('powerShellExtensionsMsDeployPackageUrl')]",
+	          "AppOffline": true,
+	          "setParameters": {
+	            "Application Path": "[variables('cmWebAppNameTidy')]",
+	            "Core Admin Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('coreSqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",          
+	            "Master Admin Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('masterSqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]"
+	          }
           }
         ]
       },

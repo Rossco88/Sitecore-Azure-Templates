@@ -59,6 +59,9 @@
     "maRepMsDeployPackageUrl": {
       "value": "https://cqupublicstorage.blob.core.windows.net/cqu-sitecore-wdp/Sitecore%209.3.0%20rev.%20003498%20(Cloud)_xp1marketingautomationreporting.scwdp.zip"
     },
+    "powerShellExtensionsMsDeployPackageUrl": { 
+      "value": "https://cqupublicstorage.blob.core.windows.net/cqu-sitecore-wdp/Sitecore.PowerShell.Extensions-6.0.scwdp.zip"
+    },
     "authCertificateBlob": {
       "value": ""
     },

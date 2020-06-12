@@ -15,13 +15,13 @@
       "value": ""
     },
     "repAuthenticationApiKey": {
-      "value": "GSDAGFANWEUIGERH68754649THGDFKH8GWHUIDRSHS"
+      "value": ""
     },
     "sqlServerLogin": {
-      "value": "cqu-sql-admin"
+      "value": ""
     },
     "sqlServerPassword": {
-      "value": "Password123"
+      "value": ""
     },
     "siMsDeployPackageUrl": {
       "value": "https://cqupublicstorage.blob.core.windows.net/cqu-sitecore-wdp/Sitecore.IdentityServer.4.0.0-r00257.scwdp.zip"

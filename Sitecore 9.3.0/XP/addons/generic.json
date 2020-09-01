@@ -12,6 +12,7 @@
     
     "cmWebAppNameTidy": "[trim(toLower(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[trim(toLower(parameters('cdWebAppName')))]",
+    "cdFailoverWebAppNameTidy": "[trim(toLower(parameters('cdFailoverWebAppName')))]",
     "prcWebAppNameTidy": "[trim(toLower(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[trim(toLower(parameters('repWebAppName')))]"
   },
@@ -29,6 +30,7 @@
         "reportingSqlDatabaseName": null,
         "cmWebAppName": null,
         "cdWebAppName": null,
+        "cdFailoverWebAppName": null,
         "prcWebAppName": null,
         "repWebAppName": null        
       }
@@ -38,6 +40,7 @@
       "defaultValue": {
         "cmMsDeployPackageUrl": null,
         "cdMsDeployPackageUrl": null,
+        "cdFailoverMsDeployPackageUrl": null,
         "prcMsDeployPackageUrl": null,
         "repMsDeployPackageUrl": null
       }
@@ -97,6 +100,10 @@
       "type": "string",
       "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-cd'))]"
     },
+    "cdFailoverWebAppName": {
+      "type": "string",
+      "defaultValue": "[coalesce(parameters('standard').cdFailoverWebAppName, concat(parameters('deploymentId'), '-cd-failover'))]"
+    },
     "prcWebAppName": {
       "type": "string",
       "defaultValue": "[coalesce(parameters('standard').prcWebAppName, concat(parameters('deploymentId'), '-prc'))]"
@@ -115,6 +122,11 @@
       "type": "securestring",
       "minLength": 1,
       "defaultValue": "[parameters('extension').cdMsDeployPackageUrl]"
+    },
+    "cdFailoverMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1,
+      "defaultValue": "[parameters('extension').cdFailoverMsDeployPackageUrl]"
     },
     "prcMsDeployPackageUrl": {
       "type": "securestring",
@@ -161,6 +173,24 @@
             "packageUri": "[parameters('cdMsDeployPackageUrl')]",
             "setParameters": {
               "Application Path": "[variables('cdWebAppNameTidy')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[concat(variables('cdFailoverWebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "dbType": "SQL",
+            "connectionString": "[concat('Data Source=tcp:', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=master;User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+            "packageUri": "[parameters('cdMsDeployPackageUrl')]",
+            "setParameters": {
+              "Application Path": "[variables('cdFailoverWebAppNameTidy')]"
             }
           }
         ]

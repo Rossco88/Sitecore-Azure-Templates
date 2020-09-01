@@ -1021,7 +1021,7 @@
         "logicalName": "[variables('sitecoreTags').prc]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
       ]
     },
     {
@@ -1610,8 +1610,6 @@
         "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('jssFailoverHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('prcHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('repHostingPlanNameTidy'))]"
       ],

@@ -427,6 +427,16 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover-hp')]"
     },
+    "jssHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-hp')]"
+    },
+    "jssFailoverHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-failover-hp')]"
+    },
     "prcHostingPlanName": {
       "type": "string",
       "minLength": 1,
@@ -471,6 +481,16 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
+    },
+    "jssWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss')]"
+    },
+    "jssFailoverWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-failover')]"
     },
     "prcWebAppName": {
       "type": "string",
@@ -688,16 +708,20 @@
     },
     "cmNodeJsVersion":{
       "type": "string",
-      "defaultValue": "8.11.1"
+      "defaultValue": "12.13.0"
     },
     "cdNodeJsVersion":{
       "type": "string",
-      "defaultValue": "8.11.1"
+      "defaultValue": "12.13.0"
+    },
+    "jssNodeJsVersion": {
+      "type": "string",
+      "defaultValue": "12.13.0"
     },
     
     "environmentType": {
       "type": "string",
-      "defaultValue": "Non-Production"
+      "defaultValue": "Production"
     },
 
     "azureServiceBusQueues": {
@@ -723,7 +747,9 @@
     "azureServiceBusTopics": {
       "type": "array",
       "defaultValue": [
-        "sitecore_processing_engine_abstractions_messages_taskstatus__sitecore_processing_engine_abstractions"
+        "sitecore_processing_engine_abstractions_messages_taskstatus__sitecore_processing_engine_abstractions",
+        "contenthub_in",
+        "contenthub_out"
       ]
     },
     "azureServiceBusSubscriptions": {
@@ -732,6 +758,10 @@
         {
           "topic": "sitecore_processing_engine_abstractions_messages_taskstatus__sitecore_processing_engine_abstractions",
           "subscription": "Sitecore_CT_ModelTrainingTaskStatusSubscriber"
+        },
+        {
+          "topic": "contenthub_out",
+          "subscription": "sitecore_notifications_ch"
         }
       ]
     },
@@ -876,6 +906,12 @@
           "cdFailoverHostingPlanName": {
             "value": "[parameters('cdFailoverHostingPlanName')]"
           },
+          "jssHostingPlanName": {
+            "value": "[parameters('jssHostingPlanName')]"
+          },
+          "jssFailoverHostingPlanName": {
+            "value": "[parameters('jssFailoverhostingPlanName')]"
+          },
           "prcHostingPlanName": {
             "value": "[parameters('prcHostingPlanName')]"
           },
@@ -894,6 +930,12 @@
           },
           "cdFailoverWebAppName": {
             "value": "[parameters('cdFailoverWebAppName')]"
+          },
+          "jssWebAppName": {
+            "value": "[parameters('jssWebAppName')]"
+          },
+          "jssFailoverWebAppName": {
+            "value": "[parameters('jssFailoverWebAppName')]"
           },
           "prcWebAppName": {
             "value": "[parameters('prcWebAppName')]"
@@ -1358,8 +1400,15 @@
           "cdWebAppName": {
             "value": "[parameters('cdWebAppName')]"
           },
+
           "cdFailoverWebAppName": {
             "value": "[parameters('cdFailoverWebAppName')]"
+          },
+          "jssWebAppName": {
+            "value": "[parameters('jssWebAppName')]"
+          },
+          "jssFailoverWebAppName": {
+            "value": "[parameters('jssFailoverWebAppName')]"
           },
           "prcWebAppName": {
             "value": "[parameters('prcWebAppName')]"
@@ -1453,6 +1502,9 @@
 
           "cdNodeJsVersion": {
             "value": "[parameters('cdNodeJsVersion')]"
+          },
+          "jssNodeJsVersion": {
+            "value": "[parameters('jssNodeJsVersion')]"
           },
 
           "environmentType": {
@@ -2190,6 +2242,9 @@
 
               "cmHostingPlanName": "[parameters('cmHostingPlanName')]",
               "cdHostingPlanName": "[parameters('cdHostingPlanName')]",
+              "cdFailvoerHostingPlanName": "[parameters('cdFailoverHostingPlanName')]",
+              "jssHostingPlanName": "[parameters('jssHostingPlanName')]",
+              "jssFailoverHostingPlanName": "[parameters('jssFailoverHostingPlanName')]",
               "prcHostingPlanName": "[parameters('prcHostingPlanName')]",
               "repHostingPlanName": "[parameters('repHostingPlanName')]",
               "xcBasicHostingPlanName": "[parameters('xcBasicHostingPlanName')]",
@@ -2197,6 +2252,9 @@
 
               "cmWebAppName": "[parameters('cmWebAppName')]",
               "cdWebAppName": "[parameters('cdWebAppName')]",
+              "cdFailoverwebAppName": "[parameters('cdFailoverWebAppName')]",
+              "jsswebAppName": "[parameters('jsswebAppName')]",
+              "jssFailoverwebAppName": "[parameters('jssFailoverWebAppName')]",
               "prcWebAppName": "[parameters('prcWebAppName')]",
               "repWebAppName": "[parameters('repWebAppName')]",
               "xcRefDataWebAppName": "[parameters('xcRefDataWebAppName')]",

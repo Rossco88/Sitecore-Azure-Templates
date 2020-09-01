@@ -26,6 +26,8 @@
     "cmHostingPlanNameTidy": "[toLower(trim(parameters('cmHostingPlanName')))]",
     "cdHostingPlanNameTidy": "[toLower(trim(parameters('cdHostingPlanName')))]",
     "cdFailoverHostingPlanNameTidy": "[tolower(trim(parameters('cdFailoverHostingPlanName')))]",
+    "jssHostingPlanNameTidy": "[tolower(trim(parameters('jssHostingPlanName')))]",
+    "jssFailoverHostingPlanNameTidy": "[tolower(trim(parameters('jssFailoverHostingPlanName')))]",
     "prcHostingPlanNameTidy": "[toLower(trim(parameters('prcHostingPlanName')))]",
     "repHostingPlanNameTidy": "[toLower(trim(parameters('repHostingPlanName')))]",
 
@@ -33,6 +35,8 @@
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[toLower(trim(parameters('cdWebAppName')))]",
     "cdFailoverWebAppNameTidy": "[tolower(trim(parameters('cdFailoverWebAppName')))]",
+    "jssWebAppNameTidy": "[tolower(trim(parameters('jssWebAppName')))]",
+    "jssFailoverWebAppNameTidy": "[tolower(trim(parameters('jssFailoverWebAppName')))]",
     "prcWebAppNameTidy": "[toLower(trim(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]",
 
@@ -47,6 +51,7 @@
       "si": "si",
       "cm": "cm",
       "cd": "cd",
+      "jss": "jss",
       "rep": "rep",
       "prc": "prc",
       "core": "core",
@@ -212,6 +217,16 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover-hp')]"
     },
+    "jssHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-hp')]"
+    },
+    "jssFailoverHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-failover-hp')]"
+    },
     "prcHostingPlanName": {
       "type": "string",
       "minLength": 1,
@@ -243,6 +258,16 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
     },
+    "jssWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss')]"
+    },
+    "jssFailoverwebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-failover')]"
+    },
     "prcWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -265,6 +290,10 @@
     "authCertificatePassword": {
       "type": "securestring",
       "minLength": 1
+    },
+    "jssNodeJsVersion": {
+      "type": "string",
+      "defaultValue": "12.13.0"
     },
 
     "skuMap": {
@@ -295,6 +324,14 @@
             "SkuName": "S2",
             "SkuCapacity": 1
           },
+          "jssHostingPlan": {
+            "SkuName": "S1",
+            "SkuCapacity": 1
+          },
+          "jssFailoverHostingPlan": {
+            "SkuName": "S1",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I1",
             "SkuCapacity": 1
@@ -371,7 +408,7 @@
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Basic",
             "DataVolumeCap": {
-              "Cap": 0.33
+              "Cap": 3.00
             }
           }
         },
@@ -400,6 +437,14 @@
             "SkuName": "S2",
             "SkuCapacity": 1
           },
+          "jssHostingPlan": {
+            "SkuName": "S2",
+            "SkuCapacity": 1
+          },
+          "jssFailoverHostingPlan": {
+            "SkuName": "S1",
+            "SkuCapacity": 1
+          },
           "cdHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 1
@@ -476,7 +521,7 @@
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Basic",
             "DataVolumeCap": {
-              "Cap": 0.33
+              "Cap": 3.00
             }
           }
         },
@@ -503,6 +548,14 @@
           },
           "cdFailoverHostingPlan": {
             "SkuName": "S2",
+            "SkuCapacity": 1
+          },
+          "jssHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
+          "jssFailoverHostingPlan": {
+            "SkuName": "S1",
             "SkuCapacity": 1
           },
           "cdHostingPlanIsolated": {
@@ -581,7 +634,7 @@
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Basic",
             "DataVolumeCap": {
-              "Cap": 0.33
+              "Cap": 3.00
             }
           }
         },
@@ -608,6 +661,14 @@
           },
           "cdFailoverHostingPlan": {
             "SkuName": "S3",
+            "SkuCapacity": 1
+          },
+          "jssHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
+          "jssFailoverHostingPlan": {
+            "SkuName": "S1",
             "SkuCapacity": 1
           },
           "cdHostingPlanIsolated": {
@@ -713,6 +774,14 @@
           },
           "cdFailoverHostingPlan": {
             "SkuName": "S3",
+            "SkuCapacity": 1
+          },
+          "jssHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
+          "jssFailoverHostingPlan": {
+            "SkuName": "S1",
             "SkuCapacity": 1
           },
           "cdHostingPlanIsolated": {
@@ -894,6 +963,48 @@
     },
     {
       "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('jssHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "sku": {
+        "name": "[if(not(variables('useAse')), parameters('resourceSizes').jssHostingPlan.SkuName, parameters('resourceSizes').cdHostingPlanIsolated.SkuName)]",
+        "capacity": "[if(not(variables('useAse')), parameters('resourceSizes').jssHostingPlan.SkuCapacity, parameters('resourceSizes').cdHostingPlanIsolated.SkuCapacity)]"
+      },
+      "properties": {
+        "name": "[variables('jssHostingPlanNameTidy')]",
+        "hostingEnvironmentProfile": "[if(variables('useAse'), variables('aseHostingEnvironmentProfile'), '')]"
+      },
+      "location": "[parameters('location')]",
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').jss]"
+      },
+      "dependsOn": [ 
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
+      ]
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('jssFailoverHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "sku": {
+        "name": "[if(not(variables('useAse')), parameters('resourceSizes').jssFailoverHostingPlan.SkuName, parameters('resourceSizes').cdHostingPlanIsolated.SkuName)]",
+        "capacity": "[if(not(variables('useAse')), parameters('resourceSizes').jssFailoverHostingPlan.SkuCapacity, parameters('resourceSizes').cdHostingPlanIsolated.SkuCapacity)]"
+      },
+      "properties": {
+        "name": "[variables('jssFailoverHostingPlanNameTidy')]",
+        "hostingEnvironmentProfile": "[if(variables('useAse'), variables('aseHostingEnvironmentProfile'), '')]"
+      },
+      "location": "[parameters('location')]",
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').jss]"
+      },
+      "dependsOn": [ 
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
+      ]
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
       "name": "[variables('prcHostingPlanNameTidy')]",
       "apiVersion": "[variables('serverFarmApiVersion')]",
       "sku": {
@@ -910,7 +1021,7 @@
         "logicalName": "[variables('sitecoreTags').prc]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]" 
       ]
     },
     {
@@ -1034,6 +1145,58 @@
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').cd]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[variables('jssWebAppNameTidy')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "phpVersion": "",
+          "nodeVersion": "[parameters('jssNodeJsVersion')]",
+          "defaultDocuments": [
+            "index.html"
+          ]
+        }
+      },
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').jss]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[variables('jssFailoverWebAppNameTidy')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('jssFailoverHostingPlanNameTidy'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "phpVersion": "",
+          "nodeVersion": "[parameters('jssNodeJsVersion')]",
+          "defaultDocuments": [
+            "index.html"
+          ]
+        }
+      },
+      "location": "australiasoutheast",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssFailoverHostingPlanNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').jss]"
       }
     },
     {
@@ -1447,6 +1610,8 @@
         "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssFailoverHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('prcHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('repHostingPlanNameTidy'))]"
       ],

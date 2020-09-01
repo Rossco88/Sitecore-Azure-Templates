@@ -25,6 +25,8 @@
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[toLower(trim(parameters('cdWebAppName')))]",
     "cdFailoverWebAppNameTidy": "[toLower(trim(parameters('cdFailoverWebAppName')))]",
+    "jssWebAppNameTidy": "[tolower(trim(parameters('jssWebAppName')))]",
+    "jssFailoverWebAppNameTidy": "[tolower(trim(parameters('jssFailoverWebAppName')))]",
     "prcWebAppNameTidy": "[toLower(trim(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]",
     "xcCollectWebAppNameTidy": "[toLower(trim(parameters('xcCollectWebAppName')))]",
@@ -319,6 +321,16 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
     },
+    "jssWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss')]"
+    },
+    "jssFailoverWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-jss-failover')]"
+    },
     "prcWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -454,16 +466,20 @@
     },
     "cmNodeJsVersion":{
       "type": "string",
-      "defaultValue": "8.11.1"
+      "defaultValue": "12.13.0"
     },
     "cdNodeJsVersion":{
       "type": "string",
-      "defaultValue": "8.11.1"
+      "defaultValue": "12.13.0"
+    },
+    "jssNodeJsVersion": {
+      "type": "string",
+      "defaultValue": "12.13.0"
     },
 
     "environmentType": {
       "type": "string",
-      "defaultValue": "Non-Production"
+      "defaultValue": "Production"
     },
 
     "azureServiceBusNamespaceName" : {
@@ -720,6 +736,48 @@
       ]
     },
     {
+      "name": "[concat(variables('jssWebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "setParameters": {
+                "Application Path": "[variables('jssWebAppNameTidy')]",
+                "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey, '')]",
+                "Application Insights Role": "[if(parameters('useApplicationInsights'), 'JSS', '')]",
+                "Use Application Insights": "[string(parameters('useApplicationInsights'))]"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
+      ]
+    },
+    {
+      "name": "[concat(variables('jssFailoverWebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "australiasoutheast",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "setParameters": {
+                "Application Path": "[variables('jssFailoverWebAppNameTidy')]",
+                "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey, '')]",
+                "Application Insights Role": "[if(parameters('useApplicationInsights'), 'JSS-FAILOVER', '')]",
+                "Use Application Insights": "[string(parameters('useApplicationInsights'))]"
+            }
+          }
+        ]
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'MSDeploy')]"
+      ]
+    },
+    {
       "name": "[concat(variables('prcWebAppNameTidy'), '/', 'MSDeploy')]",
       "type": "Microsoft.Web/sites/extensions",
       "location": "[parameters('location')]",
@@ -759,7 +817,9 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]",
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]",
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'MSDeploy')]",
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssFailoverWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -822,6 +882,32 @@
       ]
     },
     {
+      "name": "[concat(variables('jssWebAppNameTidy'), '/', 'appsettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "WEBSITE_DYNAMIC_CACHE": 0,
+        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('jssNodeJsVersion')]",
+        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
+      ]
+    },
+    {
+      "name": "[concat(variables('jssFailoverWebAppNameTidy'), '/', 'appsettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "WEBSITE_DYNAMIC_CACHE": 0,
+        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('jssNodeJsVersion')]",
+        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'MSDeploy')]"
+      ]
+    },
+    {
       "name": "[concat(variables('cmWebAppNameTidy'), '/', 'appsettings')]",
       "type": "Microsoft.Web/sites/config",
       "apiVersion": "[variables('webApiVersion')]",
@@ -832,7 +918,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/config', variables('cdFailoverWebAppNameTidy'),'appsettings')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('jssFailoverWebAppNameTidy'),'appsettings')]"
       ]
     },
     {

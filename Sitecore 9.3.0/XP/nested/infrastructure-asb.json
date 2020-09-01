@@ -43,7 +43,9 @@
     "azureServiceBusTopics": {
       "type": "array",
       "defaultValue": [
-        "sitecore_processing_engine_abstractions_messages_taskstatus__sitecore_processing_engine_abstractions"
+        "sitecore_processing_engine_abstractions_messages_taskstatus__sitecore_processing_engine_abstractions",
+        "contenthub_in",
+        "contenthub_out"
       ]
     },
     "azureServiceBusSubscriptions": {
@@ -52,6 +54,10 @@
         {
           "topic": "sitecore_processing_engine_abstractions_messages_taskstatus__sitecore_processing_engine_abstractions",
           "subscription": "Sitecore_CT_ModelTrainingTaskStatusSubscriber"
+        },
+        {
+          "topic": "contenthub_out",
+          "subscription": "sitecore_notifications_ch"
         }
       ]
     },

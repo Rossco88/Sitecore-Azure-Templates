@@ -994,13 +994,13 @@
         "name": "[variables('jssFailoverHostingPlanNameTidy')]",
         "hostingEnvironmentProfile": "[if(variables('useAse'), variables('aseHostingEnvironmentProfile'), '')]"
       },
-      "location": "[parameters('location')]",
+      "location": "australiasoutheast",
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').jss]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssHostingPlanNameTidy'))]" 
       ]
     },
     {
@@ -1021,7 +1021,7 @@
         "logicalName": "[variables('sitecoreTags').prc]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('jssFailoverHostingPlanNameTidy'))]" 
       ]
     },
     {

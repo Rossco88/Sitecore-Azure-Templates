@@ -817,9 +817,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]",
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]",
-        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'MSDeploy')]",
-        "[resourceId('Microsoft.Web/sites/extensions', variables('jssFailoverWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {

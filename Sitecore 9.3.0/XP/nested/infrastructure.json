@@ -958,7 +958,7 @@
         "logicalName": "[variables('sitecoreTags').cd]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
       ]
     },
     {
@@ -979,7 +979,7 @@
         "logicalName": "[variables('sitecoreTags').jss]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdFailoverHostingPlanNameTidy'))]" 
       ]
     },
     {

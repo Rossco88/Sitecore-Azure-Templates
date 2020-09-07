@@ -1394,7 +1394,6 @@
           "cdWebAppName": {
             "value": "[parameters('cdWebAppName')]"
           },
-
           "cdFailoverWebAppName": {
             "value": "[parameters('cdFailoverWebAppName')]"
           },

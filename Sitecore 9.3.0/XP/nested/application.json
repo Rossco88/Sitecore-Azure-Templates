@@ -757,7 +757,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -778,7 +778,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -820,7 +820,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssFailoverWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -879,7 +879,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('cdWebAppNameTidy'),'appsettings')]"
       ]
     },
     {
@@ -892,7 +892,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('cdFailoverWebAppNameTidy'),'appsettings')]"
       ]
     },
     {
@@ -905,7 +905,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('jssWebAppNameTidy'),'appsettings')]"
       ]
     },
     {
@@ -919,7 +919,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/config', variables('cdWebAppNameTidy'),'appsettings')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('jssFailoverWebAppNameTidy'),'appsettings')]"
       ]
     },
     {

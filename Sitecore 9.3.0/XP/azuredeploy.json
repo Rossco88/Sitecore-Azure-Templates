@@ -553,7 +553,7 @@
       "type": "securestring"
     },
 
-    "cdFailovermsDeployPackageUrl": {
+    "cdFailoverMsDeployPackageUrl": {
       "type": "securestring"
     },
     "prcMsDeployPackageUrl": {
@@ -1457,7 +1457,7 @@
             "value": "[parameters('SitecoreJSSMsDeployPackageUrl')]"
           },
           "SXAMsDeployPackageUrl": {
-            "value": "[parameters('SitecoreJSSMsDeployPackageUrl')]"
+            "value": "[parameters('SXAMsDeployPackageUrl')]"
           },
           "setCompatibilityLevelMsDeployPackageUrl": {
             "value": "[parameters('setCompatibilityLevelMsDeployPackageUrl')]"
@@ -2242,7 +2242,7 @@
 
               "cmHostingPlanName": "[parameters('cmHostingPlanName')]",
               "cdHostingPlanName": "[parameters('cdHostingPlanName')]",
-              "cdFailvoerHostingPlanName": "[parameters('cdFailoverHostingPlanName')]",
+              "cdFailoverHostingPlanName": "[parameters('cdFailoverHostingPlanName')]",
               "jssHostingPlanName": "[parameters('jssHostingPlanName')]",
               "jssFailoverHostingPlanName": "[parameters('jssFailoverHostingPlanName')]",
               "prcHostingPlanName": "[parameters('prcHostingPlanName')]",
@@ -2252,9 +2252,9 @@
 
               "cmWebAppName": "[parameters('cmWebAppName')]",
               "cdWebAppName": "[parameters('cdWebAppName')]",
-              "cdFailoverwebAppName": "[parameters('cdFailoverWebAppName')]",
-              "jsswebAppName": "[parameters('jsswebAppName')]",
-              "jssFailoverwebAppName": "[parameters('jssFailoverWebAppName')]",
+              "cdFailoverWebAppName": "[parameters('cdFailoverWebAppName')]",
+              "jssWebAppName": "[parameters('jsswebAppName')]",
+              "jssFailoverWebAppName": "[parameters('jssFailoverWebAppName')]",
               "prcWebAppName": "[parameters('prcWebAppName')]",
               "repWebAppName": "[parameters('repWebAppName')]",
               "xcRefDataWebAppName": "[parameters('xcRefDataWebAppName')]",

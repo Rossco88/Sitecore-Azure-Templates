@@ -253,7 +253,7 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
     },
-    "cdFailoverwebAppName": {
+    "cdFailoverWebAppName": {
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-failover')]"
@@ -263,7 +263,7 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-jss')]"
     },
-    "jssFailoverwebAppName": {
+    "jssFailoverWebAppName": {
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-jss-failover')]"

@@ -879,6 +879,32 @@
       ]
     },
     {
+      "name": "[concat(variables('jssWebAppNameTidy'), '/', 'appsettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "WEBSITE_DYNAMIC_CACHE": 0,
+        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('jssNodeJsVersion')]",
+        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'appsettings')]"
+      ]
+    },
+    {
+      "name": "[concat(variables('jssFailoverWebAppNameTidy'), '/', 'appsettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "WEBSITE_DYNAMIC_CACHE": 0,
+        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('jssNodeJsVersion')]",
+        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'appsettings')]"
+      ]
+    },
+    {
       "name": "[concat(variables('cmWebAppNameTidy'), '/', 'appsettings')]",
       "type": "Microsoft.Web/sites/config",
       "apiVersion": "[variables('webApiVersion')]",
@@ -889,7 +915,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/config', variables('cdFailoverWebAppNameTidy'),'appsettings')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('jssFailoverWebAppNameTidy'),'appsettings')]"
       ]
     },
     {

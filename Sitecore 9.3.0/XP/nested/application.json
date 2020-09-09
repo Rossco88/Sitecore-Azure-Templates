@@ -736,7 +736,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cmWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -757,7 +757,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -778,7 +778,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -820,7 +820,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('jssFailoverWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -879,7 +879,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -892,7 +892,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'appsettings')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -905,7 +905,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('jssWebAppNameTidy'),'appsettings')]"
+        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
@@ -919,7 +919,7 @@
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/config', variables('jssFailoverWebAppNameTidy'),'appsettings')]"
+        "[resourceId('Microsoft.Web/sites/config', variables('cdWebAppNameTidy'),'appsettings')]"
       ]
     },
     {

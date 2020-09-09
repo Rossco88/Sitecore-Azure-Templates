@@ -390,6 +390,10 @@
       "type": "securestring",
       "minLength": 1
     },
+    "cdFailoverMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },
     "prcMsDeployPackageUrl": {
       "type": "securestring",
       "minLength": 1
@@ -698,7 +702,7 @@
       "properties": {
         "addOnPackages": [
           {
-            "packageUri": "[parameters('cdMsDeployPackageUrl')]",
+            "packageUri": "[parameters('cdFailoverMsDeployPackageUrl')]",
             "dbType": "SQL",
             "connectionString": "[concat('Data Source=tcp:', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=master;User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
             "setParameters": {

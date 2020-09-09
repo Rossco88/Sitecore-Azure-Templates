@@ -552,6 +552,10 @@
     "cdMsDeployPackageUrl": {
       "type": "securestring"
     },
+
+    "cdFailovermsDeployPackageUrl": {
+      "type": "securestring"
+    },
     "prcMsDeployPackageUrl": {
       "type": "securestring"
     },
@@ -1436,6 +1440,9 @@
           },
           "cdMsDeployPackageUrl": {
             "value": "[parameters('cdMsDeployPackageUrl')]"
+          },
+          "cdFailoverMsDeployPackageUrl": {
+            "value": "[parameters('cdFailoverMsDeployPackageUrl')]"
           },
           "prcMsDeployPackageUrl": {
             "value": "[parameters('prcMsDeployPackageUrl')]"

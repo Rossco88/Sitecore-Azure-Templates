@@ -702,7 +702,7 @@
       "properties": {
         "addOnPackages": [
           {
-            "packageUri": "[parameters('cdFailoverMsDeployPackageUrl')]",
+            "packageUri": "[parameters('cdMsDeployPackageUrl')]",
             "dbType": "SQL",
             "connectionString": "[concat('Data Source=tcp:', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=master;User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
             "setParameters": {
@@ -748,7 +748,6 @@
         "addOnPackages": [
           {
             "setParameters": {
-                "Application Path": "[variables('jssWebAppNameTidy')]",
                 "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey, '')]",
                 "Application Insights Role": "[if(parameters('useApplicationInsights'), 'JSS', '')]",
                 "Use Application Insights": "[string(parameters('useApplicationInsights'))]"
@@ -769,7 +768,6 @@
         "addOnPackages": [
           {
             "setParameters": {
-                "Application Path": "[variables('jssFailoverWebAppNameTidy')]",
                 "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey, '')]",
                 "Application Insights Role": "[if(parameters('useApplicationInsights'), 'JSS-FAILOVER', '')]",
                 "Use Application Insights": "[string(parameters('useApplicationInsights'))]"

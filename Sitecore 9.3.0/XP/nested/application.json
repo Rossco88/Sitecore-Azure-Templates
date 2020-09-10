@@ -740,46 +740,6 @@
       ]
     },
     {
-      "name": "[concat(variables('jssWebAppNameTidy'), '/', 'MSDeploy')]",
-      "type": "Microsoft.Web/sites/extensions",
-      "location": "[parameters('location')]",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "addOnPackages": [
-          {
-            "setParameters": {
-                "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey, '')]",
-                "Application Insights Role": "[if(parameters('useApplicationInsights'), 'JSS', '')]",
-                "Use Application Insights": "[string(parameters('useApplicationInsights'))]"
-            }
-          }
-        ]
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdWebAppNameTidy'),'MSDeploy')]"
-      ]
-    },
-    {
-      "name": "[concat(variables('jssFailoverWebAppNameTidy'), '/', 'MSDeploy')]",
-      "type": "Microsoft.Web/sites/extensions",
-      "location": "australiasoutheast",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "addOnPackages": [
-          {
-            "setParameters": {
-                "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey, '')]",
-                "Application Insights Role": "[if(parameters('useApplicationInsights'), 'JSS-FAILOVER', '')]",
-                "Use Application Insights": "[string(parameters('useApplicationInsights'))]"
-            }
-          }
-        ]
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('cdFailoverWebAppNameTidy'),'MSDeploy')]"
-      ]
-    },
-    {
       "name": "[concat(variables('prcWebAppNameTidy'), '/', 'MSDeploy')]",
       "type": "Microsoft.Web/sites/extensions",
       "location": "[parameters('location')]",
@@ -874,32 +834,6 @@
         "WEBSITE_LOAD_CERTIFICATES": "[parameters('authCertificateThumbprint')]",
         "WEBSITE_DYNAMIC_CACHE": 0,
         "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('cdNodeJsVersion')]",
-        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
-      ]
-    },
-    {
-      "name": "[concat(variables('jssWebAppNameTidy'), '/', 'appsettings')]",
-      "type": "Microsoft.Web/sites/config",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "WEBSITE_DYNAMIC_CACHE": 0,
-        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('jssNodeJsVersion')]",
-        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('repWebAppNameTidy'),'MSDeploy')]"
-      ]
-    },
-    {
-      "name": "[concat(variables('jssFailoverWebAppNameTidy'), '/', 'appsettings')]",
-      "type": "Microsoft.Web/sites/config",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "WEBSITE_DYNAMIC_CACHE": 0,
-        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('jssNodeJsVersion')]",
         "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
       },
       "dependsOn": [
